@@ -11,7 +11,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -37,7 +36,7 @@ public class GroupmembersFacadeREST extends AbstractFacade<Groupmembers> {
     
     private String[] getRoles (String uId){
         List<String> list =new ArrayList<>();
-        List<Groupmembers> lst = em.createNamedQuery("Groupmembers.findByGMember", Groupmembers.class)
+        List<Groupmembers> lst = getEntityManager().createNamedQuery("Groupmembers.findByGMember", Groupmembers.class)
                 .setParameter("gMember", uId).getResultList();
         for (Groupmembers el : lst) {
             list.add(el.getGName());
@@ -56,11 +55,11 @@ public class GroupmembersFacadeREST extends AbstractFacade<Groupmembers> {
         return builder.build();
     }
     
-    @GET
-    @Override
-    public List<Groupmembers> findAll() {
-        return super.findAll();
-    }
+//    @GET
+//    @Override
+//    public List<Groupmembers> findAll() {
+//        return super.findAll();
+//    }
     
     @Override
     protected EntityManager getEntityManager() {
