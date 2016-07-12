@@ -141,11 +141,11 @@ public class Orders implements Serializable {
 //    private Kontragents agentId;
     @Column(name = "AGENT_ID")
     private String agentId;
-//    @JoinColumn(name = "ZAMER_ID", referencedColumnName = "ID")
-//    @ManyToOne
-//    private Kontragents zamerId;
-    @Column(name = "ZAMER_ID")
-    private String zamerId;
+    @JoinColumn(name = "ZAMER_ID", referencedColumnName = "ID")
+    @ManyToOne
+    private Kontragents zamerId;
+//    @Column(name = "ZAMER_ID")
+//    private String zamerId;
 //    @JoinColumn(name = "KASSA_ID", referencedColumnName = "ID")
 //    @ManyToOne(optional = false)
 //    private Kassa kassaId;
@@ -372,11 +372,11 @@ public class Orders implements Serializable {
         this.agentId = agentId;
     }
 
-    public String getZamerId() {
+    public Kontragents getZamerId() {
         return zamerId;
     }
 
-    public void setZamerId(String zamerId) {
+    public void setZamerId(Kontragents zamerId) {
         this.zamerId = zamerId;
     }
 
