@@ -46,11 +46,12 @@ public class KassaFacadeREST extends AbstractFacade<Kassa> {
     @GET
     @Produces({"application/xml", "application/json"})
     public List<Kassa> findAll(@Context SecurityContext context) {
-        String user = context.getUserPrincipal().getName();
-        Users u = getEntityManager().createNamedQuery("Users.findByLogin", Users.class)
-                .setParameter("login", user).getSingleResult();
-        return getEntityManager().createNamedQuery("Kassa.findBySettings", Kassa.class)
-                .setParameter("userId", u.getId()).getResultList();
+//        String user = context.getUserPrincipal().getName();
+//        Users u = getEntityManager().createNamedQuery("Users.findByLogin", Users.class)
+//                .setParameter("login", user).getSingleResult();
+//        return getEntityManager().createNamedQuery("Kassa.findBySettings", Kassa.class)
+//                .setParameter("userId", u.getId()).getResultList();
+        return super.findAll();
     }
 
     @Override

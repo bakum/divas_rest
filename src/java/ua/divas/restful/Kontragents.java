@@ -110,9 +110,9 @@ public class Kontragents implements Serializable {
     @NotNull
     @Column(name = "IS_MEASURER")
     private short isMeasurer;
-    @Lob
-    @Column(name = "PHOTO")
-    private Serializable photo;
+//    @Lob
+//    @Column(name = "PHOTO")
+//    private Serializable photo;
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @ManyToOne
     private Users userId;
@@ -254,13 +254,13 @@ public class Kontragents implements Serializable {
         this.isMeasurer = isMeasurer;
     }
 
-    public Serializable getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(Serializable photo) {
-        this.photo = photo;
-    }
+//    public Serializable getPhoto() {
+//        return photo;
+//    }
+//
+//    public void setPhoto(Serializable photo) {
+//        this.photo = photo;
+//    }
 
     public Users getUserId() {
         return userId;

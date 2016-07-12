@@ -14,6 +14,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -114,26 +116,26 @@ public class Orders implements Serializable {
     @Column(name = "DAT_COMPLETE_FACT")
     @Temporal(TemporalType.TIMESTAMP)
     private Date datCompleteFact;
-//    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
-//    @ManyToOne(optional = false)
-//    private Users userId;
-    @Column(name = "USER_ID")
-    private String userId;
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Users userId;
+//    @Column(name = "USER_ID")
+//    private String userId;
 //    @JoinColumn(name = "ACTIVITIES_ID", referencedColumnName = "ID")
 //    @ManyToOne(optional = false)
 //    private TypeOfActivities activitiesId;
 //    @Column(name = "ACTIVITIES_ID")
 //    private String activitiesId;
-//    @JoinColumn(name = "STATUS_ID", referencedColumnName = "ID")
-//    @ManyToOne(optional = false)
-//    private OrderStatus statusId;
-    @Column(name = "STATUS_ID")
-    private String statusId;
-//    @JoinColumn(name = "KONTRAG_ID", referencedColumnName = "ID")
-//    @ManyToOne(optional = false)
-//    private Kontragents kontragId;
-    @Column(name = "KONTRAG_ID")
-    private String kontragId;
+    @JoinColumn(name = "STATUS_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private OrderStatus statusId;
+//    @Column(name = "STATUS_ID")
+//    private String statusId;
+    @JoinColumn(name = "KONTRAG_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Kontragents kontragId;
+//    @Column(name = "KONTRAG_ID")
+//    private String kontragId;
 //    @JoinColumn(name = "AGENT_ID", referencedColumnName = "ID")
 //    @ManyToOne
 //    private Kontragents agentId;
@@ -170,10 +172,10 @@ public class Orders implements Serializable {
     @Column(name = "CURR_ID")
     private String currId;
     
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
-//    private Collection<OrdersTpOplaty> ordersTpOplatyCollection;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
-//    private Collection<OrdersTpUslugi> ordersTpUslugiCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+    private Collection<OrdersTpOplaty> ordersTpOplatyCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+    private Collection<OrdersTpUslugi> ordersTpUslugiCollection;
 
     public Orders() {
     }
@@ -330,11 +332,11 @@ public class Orders implements Serializable {
         this.datCompleteFact = datCompleteFact;
     }
 
-    public String getUserId() {
+    public Users getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Users userId) {
         this.userId = userId;
     }
 
@@ -346,19 +348,19 @@ public class Orders implements Serializable {
 //        this.activitiesId = activitiesId;
 //    }
 
-    public String getStatusId() {
+    public OrderStatus getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(String statusId) {
+    public void setStatusId(OrderStatus statusId) {
         this.statusId = statusId;
     }
 
-    public String getKontragId() {
+    public Kontragents getKontragId() {
         return kontragId;
     }
 
-    public void setKontragId(String kontragId) {
+    public void setKontragId(Kontragents kontragId) {
         this.kontragId = kontragId;
     }
 
@@ -418,23 +420,23 @@ public class Orders implements Serializable {
         this.currId = currId;
     }
 
-//    @XmlTransient
-//    public Collection<OrdersTpOplaty> getOrdersTpOplatyCollection() {
-//        return ordersTpOplatyCollection;
-//    }
-//
-//    public void setOrdersTpOplatyCollection(Collection<OrdersTpOplaty> ordersTpOplatyCollection) {
-//        this.ordersTpOplatyCollection = ordersTpOplatyCollection;
-//    }
-//
-//    @XmlTransient
-//    public Collection<OrdersTpUslugi> getOrdersTpUslugiCollection() {
-//        return ordersTpUslugiCollection;
-//    }
-//
-//    public void setOrdersTpUslugiCollection(Collection<OrdersTpUslugi> ordersTpUslugiCollection) {
-//        this.ordersTpUslugiCollection = ordersTpUslugiCollection;
-//    }
+    @XmlTransient
+    public Collection<OrdersTpOplaty> getOrdersTpOplatyCollection() {
+        return ordersTpOplatyCollection;
+    }
+
+    public void setOrdersTpOplatyCollection(Collection<OrdersTpOplaty> ordersTpOplatyCollection) {
+        this.ordersTpOplatyCollection = ordersTpOplatyCollection;
+    }
+
+    @XmlTransient
+    public Collection<OrdersTpUslugi> getOrdersTpUslugiCollection() {
+        return ordersTpUslugiCollection;
+    }
+
+    public void setOrdersTpUslugiCollection(Collection<OrdersTpUslugi> ordersTpUslugiCollection) {
+        this.ordersTpUslugiCollection = ordersTpUslugiCollection;
+    }
 
     @Override
     public int hashCode() {

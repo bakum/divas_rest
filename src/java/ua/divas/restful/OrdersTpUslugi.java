@@ -75,11 +75,11 @@ public class OrdersTpUslugi implements Serializable {
     private String addWork;
     @Column(name = "PRICE_ADD")
     private BigDecimal priceAdd;
-//    @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")
-//    @ManyToOne(optional = false)
-//    private Orders orderId;
-    @Column(name = "ORDER_ID")
-    private String orderId;
+    @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Orders orderId;
+//    @Column(name = "ORDER_ID")
+//    private String orderId;
 //    @JoinColumn(name = "NOM_ID", referencedColumnName = "ID")
 //    @ManyToOne(optional = false)
 //    private Nomenklatura nomId;
@@ -180,11 +180,11 @@ public class OrdersTpUslugi implements Serializable {
         this.priceAdd = priceAdd;
     }
 
-    public String getOrderId() {
+    public Orders getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Orders orderId) {
         this.orderId = orderId;
     }
 

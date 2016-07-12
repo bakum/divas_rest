@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -60,11 +62,11 @@ public class OrdersTpOplaty implements Serializable {
 //    private Users userId;
     @Column(name = "USER_ID")
     private String userId;
-//    @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")
-//    @ManyToOne(optional = false)
-//    private Orders orderId;
-    @Column(name = "ORDER_ID")
-    private String orderId;
+    @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Orders orderId;
+//    @Column(name = "ORDER_ID")
+//    private String orderId;
 //    @JoinColumn(name = "ZAMER_ID", referencedColumnName = "ID")
 //    @ManyToOne
 //    private Kontragents zamerId;
@@ -129,11 +131,11 @@ public class OrdersTpOplaty implements Serializable {
         this.userId = userId;
     }
 
-    public String getOrderId() {
+    public Orders getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Orders orderId) {
         this.orderId = orderId;
     }
 

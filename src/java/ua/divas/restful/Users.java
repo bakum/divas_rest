@@ -110,9 +110,9 @@ public class Users implements Serializable {
     private Date dateBefore;
     @Column(name = "DATE_BEFIRE_ACCEPT")
     private Short dateBefireAccept;
-    @Lob
-    @Column(name = "PHOTO")
-    private Serializable photo;
+//    @Lob
+//    @Column(name = "PHOTO")
+//    private Serializable photo;
     @OneToMany(mappedBy = "userId")
     private Collection<Kontragents> kontragentsCollection;
     @OneToMany(mappedBy = "mainUser")
@@ -250,13 +250,13 @@ public class Users implements Serializable {
         this.dateBefireAccept = dateBefireAccept;
     }
 
-    public Serializable getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(Serializable photo) {
-        this.photo = photo;
-    }
+//    public Serializable getPhoto() {
+//        return photo;
+//    }
+//
+//    public void setPhoto(Serializable photo) {
+//        this.photo = photo;
+//    }
 
     @XmlTransient
     public Collection<Kontragents> getKontragentsCollection() {

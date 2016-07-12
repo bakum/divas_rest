@@ -52,6 +52,7 @@ public class KontragentsFacadeREST extends AbstractFacade<Kontragents> {
     @Produces({"application/xml", "application/json"})
     public List<Kontragents> findAll() {
         return super.findAll();
+//        return getEntityManager().createNamedQuery("Kontragents.findAll", Kontragents.class).getResultList();
     }
 
 //    @GET
