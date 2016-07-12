@@ -169,10 +169,15 @@ public class OrdersFacadeREST extends AbstractFacade<Orders> {
 //        String priv = getPrivilege(user);
 //        switch (priv) {
 //            case "administrator":
+//                return getEntityManager().createNamedQuery("Orders.findAllForDispatch", Orders.class)
+//                        .setParameter("name1", this.getStatus().getId())
+//                        .setParameter("name2", this.getNewStatus().getId())
+//                        .setParameter("name3", this.getNotPayStatus().getId())
+//                        .getResultList();
                 return getEntityManager().createNamedQuery("Orders.findAllForDispatch", Orders.class)
-                        .setParameter("name1", this.getStatus().getId())
-                        .setParameter("name2", this.getNewStatus().getId())
-                        .setParameter("name3", this.getNotPayStatus().getId())
+                        .setParameter("name1", this.getStatus())
+                        .setParameter("name2", this.getNewStatus())
+                        .setParameter("name3", this.getNotPayStatus())
                         .getResultList();
 //        return super.findAll();
 //            case "z_dispatcher":

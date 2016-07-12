@@ -156,11 +156,11 @@ public class Orders implements Serializable {
 //    private Firms firmId;
 //    @Column(name = "FIRM_ID")
 //    private String firmId;
-//    @JoinColumn(name = "DIVISION_ID", referencedColumnName = "ID")
-//    @ManyToOne(optional = false)
-//    private Divisions divisionId;
-    @Column(name = "DIVISION_ID")
-    private String divisionId;
+    @JoinColumn(name = "DIVISION_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Divisions divisionId;
+//    @Column(name = "DIVISION_ID")
+//    private String divisionId;
 //    @JoinColumn(name = "DIVISION_DEST", referencedColumnName = "ID")
 //    @ManyToOne
 //    private Divisions divisionDest;
@@ -396,11 +396,11 @@ public class Orders implements Serializable {
 //        this.firmId = firmId;
 //    }
 
-    public String getDivisionId() {
+    public Divisions getDivisionId() {
         return divisionId;
     }
 
-    public void setDivisionId(String divisionId) {
+    public void setDivisionId(Divisions divisionId) {
         this.divisionId = divisionId;
     }
 
