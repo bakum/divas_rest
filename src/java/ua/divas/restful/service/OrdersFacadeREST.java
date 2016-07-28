@@ -136,11 +136,11 @@ public class OrdersFacadeREST extends AbstractFacade<Orders> {
 
     }
 
-    private Kontragents getZamer(SecurityContext context) {
-        Users u = getCurrentUser(context.getUserPrincipal().getName());
-        UserSettings us = getCurrentUserSettings(u);
-        return getCurrenZamer(us.getZamerkontragId());
-    }
+//    private Kontragents getZamer(SecurityContext context) {
+//        Users u = getCurrentUser(context.getUserPrincipal().getName());
+//        UserSettings us = getCurrentUserSettings(u);
+//        return getCurrenZamer(us.getZamerkontragId());
+//    }
 
     private String getPrivilege(String un) {
         return getEntityManager().createNamedQuery("Groupmembers.findByGMember", Groupmembers.class)

@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -41,11 +43,12 @@ public class UserSettings implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "USER_ID")
     private String userId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "ZAMERKONTRAG_ID")
-    private String zamerkontragId;
+    @JoinColumn(name = "ZAMERKONTRAG_ID", referencedColumnName = "ID")
+    @ManyToOne
+    private Kontragents zamerkontragId;
+    @JoinColumn(name = "KONTRAG_ID", referencedColumnName = "ID")
+    @ManyToOne
+    private Kontragents kontragId;
 
     public UserSettings() {
     }
@@ -70,12 +73,20 @@ public class UserSettings implements Serializable {
         this.userId = userId;
     }
 
-    public String getZamerkontragId() {
+    public Kontragents getZamerkontragId() {
         return zamerkontragId;
     }
 
-    public void setZamerkontragId(String zamerkontragId) {
+    public void setZamerkontragId(Kontragents zamerkontragId) {
         this.zamerkontragId = zamerkontragId;
+    }
+
+    public Kontragents getKontragId() {
+        return kontragId;
+    }
+
+    public void setKontragId(Kontragents kontragId) {
+        this.kontragId = kontragId;
     }
 
     @Override

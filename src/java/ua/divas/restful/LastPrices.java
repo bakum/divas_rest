@@ -61,6 +61,8 @@ public class LastPrices implements Serializable {
 //    private Nomenklatura nomId;
     @Column(name = "NOM_ID")
     private String nomId;
+    @Column(name = "ED_IZM")
+    private String measureId;
 
     public LastPrices() {
     }
@@ -134,6 +136,15 @@ public class LastPrices implements Serializable {
         }
         return true;
     }
+
+    public String getMeasureId() {
+        return measureId;
+    }
+
+    public void setMeasureId(String measureId) {
+        this.measureId = measureId;
+    }
+    
 
     @Override
     public String toString() {

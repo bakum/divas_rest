@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -38,8 +40,9 @@ public class KassaSettings implements Serializable {
     private String id;
     @Column(name = "USER_ID")
     private String userId;
-    @Column(name = "KASSA_ID")
-    private String kassaId;
+    @JoinColumn(name = "KASSA_ID", referencedColumnName = "ID")
+    @ManyToOne
+    private Kassa kassaId;
 
     public KassaSettings() {
     }
@@ -64,11 +67,11 @@ public class KassaSettings implements Serializable {
         this.userId = userId;
     }
 
-    public String getKassaId() {
+    public Kassa getKassaId() {
         return kassaId;
     }
 
-    public void setKassaId(String kassaId) {
+    public void setKassaId(Kassa kassaId) {
         this.kassaId = kassaId;
     }
 

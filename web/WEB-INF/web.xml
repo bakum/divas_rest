@@ -28,62 +28,72 @@
         <web-resource-collection>
             <web-resource-name>Orders</web-resource-name>
             <description/>
-            <url-pattern>/identity/orders/*</url-pattern>
+            <url-pattern>/restful/orders/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Kontragents</web-resource-name>
             <description/>
-            <url-pattern>/identity/kontragents/*</url-pattern>
+            <url-pattern>/restful/kontragents/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Divisions</web-resource-name>
             <description/>
-            <url-pattern>/identity/divisions/*</url-pattern>
+            <url-pattern>/restful/divisions/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Kassa</web-resource-name>
             <description/>
-            <url-pattern>/identity/kassa/*</url-pattern>
+            <url-pattern>/restful/kassa/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Price</web-resource-name>
             <description/>
-            <url-pattern>/identity/price/*</url-pattern>
+            <url-pattern>/restful/price/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Nomenklatura</web-resource-name>
             <description/>
-            <url-pattern>/identity/nomenklatura/*</url-pattern>
+            <url-pattern>/restful/nomenklatura/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Status</web-resource-name>
             <description/>
-            <url-pattern>/identity/status/*</url-pattern>
+            <url-pattern>/restful/status/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Oplaty</web-resource-name>
             <description/>
-            <url-pattern>/identity/oplaty/*</url-pattern>
+            <url-pattern>/restful/oplaty/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Uslugi</web-resource-name>
             <description/>
-            <url-pattern>/identity/uslugi/*</url-pattern>
+            <url-pattern>/restful/uslugi/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Contact</web-resource-name>
             <description/>
-            <url-pattern>/identity/contact/*</url-pattern>
+            <url-pattern>/restful/contact/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Users</web-resource-name>
             <description/>
-            <url-pattern>/identity/users/*</url-pattern>
+            <url-pattern>/restful/users/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>MeasureUnits</web-resource-name>
             <description/>
-            <url-pattern>/identity/measure/*</url-pattern>
+            <url-pattern>/restful/measure/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>KassaSettings</web-resource-name>
+            <description/>
+            <url-pattern>/restful/kassasettings/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>UserSettings</web-resource-name>
+            <description/>
+            <url-pattern>/restful/usersettings/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
