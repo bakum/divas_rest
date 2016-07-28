@@ -73,7 +73,7 @@ public class KassaSettingsFacadeREST extends AbstractFacade<KassaSettings> {
     public List<KassaSettings> findByUser(@PathParam("id") String id) {
 //        return super.find(id);
         return getEntityManager().createNamedQuery("KassaSettings.findByUser", KassaSettings.class)
-                .setParameter("userid", id).getResultList();
+                .setParameter("userId", id).getResultList();
     }
 
     @GET
