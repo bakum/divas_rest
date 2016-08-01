@@ -136,15 +136,15 @@ public class OrdersFacadeREST extends AbstractFacade<Orders> {
 
     }
 
-//    private Kontragents getZamer(SecurityContext context) {
-//        Users u = getCurrentUser(context.getUserPrincipal().getName());
-//        UserSettings us = getCurrentUserSettings(u);
-//        return getCurrenZamer(us.getZamerkontragId());
-//    }
+    private Kontragents getZamer(String user) {
+        Users u = getCurrentUser(user);
+        UserSettings us = getCurrentUserSettings(u);
+        return getCurrenZamer(us.getZamerkontragId().getId());
+    }
 
-    private String getPrivilege(String un) {
+    private List<Groupmembers> getPrivilege(String un) {
         return getEntityManager().createNamedQuery("Groupmembers.findByGMember", Groupmembers.class)
-                .setParameter("gMember", un).getSingleResult().getGName();
+                .setParameter("gMember", un).getResultList();
     }
 
     @PUT
@@ -165,61 +165,43 @@ public class OrdersFacadeREST extends AbstractFacade<Orders> {
     @GET
     @Produces({"application/xml", "application/json"})
     public List<Orders> findAll() {
-//        String user = context.getUserPrincipal().getName();
-//        String priv = getPrivilege(user);
-//        switch (priv) {
-//            case "administrator":
-//                return getEntityManager().createNamedQuery("Orders.findAllForDispatch", Orders.class)
-//                        .setParameter("name1", this.getStatus().getId())
-//                        .setParameter("name2", this.getNewStatus().getId())
-//                        .setParameter("name3", this.getNotPayStatus().getId())
-//                        .getResultList();
                 return getEntityManager().createNamedQuery("Orders.findAllForDispatch", Orders.class)
                         .setParameter("name1", this.getStatus())
                         .setParameter("name2", this.getNewStatus())
                         .setParameter("name3", this.getNotPayStatus())
                         .getResultList();
-//        return super.findAll();
-//            case "z_dispatcher":
-//                return getEntityManager().createNamedQuery("Orders.findAllForDispatch", Orders.class)
-//                        .setParameter("name1", this.getStatus().getId())
-//                        .setParameter("name2", this.getNewStatus().getId())
-//                        .setParameter("name3", this.getNotPayStatus().getId())
-//                        .getResultList();
-//            default:
-//                return getEntityManager().createNamedQuery("Orders.findAll", Orders.class)
-//                        .setParameter("statusid", this.getStatus().getId())
-//                        .setParameter("zamerid", this.getZamer(context).getId())
-//                        .getResultList();
-//        }
+    }
+    
+    private String usrPriv(List<Groupmembers> mem){
+        String pr = "none";
+        for (Groupmembers temp : mem) {
+            pr = temp.getGName();
+	}
+        return pr;
     }
 
-//    @GET
-//    @Produces({"application/xml", "application/json"})
-//    public List<Orders> findAll(@Context SecurityContext context) {
-//        String user = context.getUserPrincipal().getName();
-//        String priv = getPrivilege(user);
-//        switch (priv) {
-//            case "administrator":
-//                return getEntityManager().createNamedQuery("Orders.findAllForDispatch", Orders.class)
-//                        .setParameter("name1", this.getStatus().getId())
-//                        .setParameter("name2", this.getNewStatus().getId())
-//                        .setParameter("name3", this.getNotPayStatus().getId())
-//                        .getResultList();
-////        return super.findAll();
-//            case "z_dispatcher":
-//                return getEntityManager().createNamedQuery("Orders.findAllForDispatch", Orders.class)
-//                        .setParameter("name1", this.getStatus().getId())
-//                        .setParameter("name2", this.getNewStatus().getId())
-//                        .setParameter("name3", this.getNotPayStatus().getId())
-//                        .getResultList();
-//            default:
-//                return getEntityManager().createNamedQuery("Orders.findAll", Orders.class)
-//                        .setParameter("statusid", this.getStatus().getId())
-//                        .setParameter("zamerid", this.getZamer(context).getId())
-//                        .getResultList();
-//        }
-//    }
+    @GET
+    @Path("{user}/userOrders")
+    @Produces({"application/xml", "application/json"})
+    public List<Orders> findAllByPrivilege(@PathParam("user") String user) {
+        List<Groupmembers> priv = getPrivilege(user);
+        switch (usrPriv(priv)) {
+            case "tester":
+            case "administrator":
+            case "z_dispatcher":
+                return getEntityManager().createNamedQuery("Orders.findAllForDispatch", Orders.class)
+                        .setParameter("name1", this.getStatus())
+                        .setParameter("name2", this.getNewStatus())
+                        .setParameter("name3", this.getNotPayStatus())
+                        .getResultList();
+            case "z_manager":
+                return getEntityManager().createNamedQuery("Orders.findAll", Orders.class)
+                        .setParameter("statusid", this.getStatus())
+                        .setParameter("zamerid", this.getZamer(user))
+                        .getResultList();
+            default: return  null;
+        }
+    }
 
     @GET
     @Path("{id}/oplatyList")
