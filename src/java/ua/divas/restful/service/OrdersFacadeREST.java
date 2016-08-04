@@ -207,18 +207,28 @@ public class OrdersFacadeREST extends AbstractFacade<Orders> {
     @Path("{id}/oplatyList")
     @Produces({"application/xml", "application/json"})
     public List<OrdersTpOplaty> findOplaty(@PathParam("id") String id) {
-        return getEntityManager().createNamedQuery("OrdersTpOplaty.findByOrder", OrdersTpOplaty.class)
-                .setParameter("orderId", id)
+        Orders o = getOrder(id);
+        try {
+            return getEntityManager().createNamedQuery("OrdersTpOplaty.findByOrder", OrdersTpOplaty.class)
+                .setParameter("orderId", o)
                 .getResultList();
+        } catch (NoResultException | NonUniqueResultException nre) {
+            return null;
+        }
     }
 
     @GET
     @Path("{id}/uslugiList")
     @Produces({"application/xml", "application/json"})
     public List<OrdersTpUslugi> findUslugi(@PathParam("id") String id) {
-        return getEntityManager().createNamedQuery("OrdersTpUslugi.findByOrder", OrdersTpUslugi.class)
-                .setParameter("orderId", id)
+        Orders o = getOrder(id);
+        try {
+            return getEntityManager().createNamedQuery("OrdersTpUslugi.findByOrder", OrdersTpUslugi.class)
+                .setParameter("orderId", o)
                 .getResultList();
+        } catch (NoResultException | NonUniqueResultException nre) {
+            return null;
+        }
     }
 
     private Orders getOrder(String id) {
@@ -233,7 +243,7 @@ public class OrdersFacadeREST extends AbstractFacade<Orders> {
     public Kontragents findKontragById(@PathParam("id") String id) {
         Orders o = getOrder(id);
         return getEntityManager().createNamedQuery("Kontragents.findById", Kontragents.class)
-                .setParameter("id", o.getKontragId()).getSingleResult();
+                .setParameter("id", o.getKontragId().getId()).getSingleResult();
     }
 
     @GET
@@ -243,9 +253,9 @@ public class OrdersFacadeREST extends AbstractFacade<Orders> {
         Orders o = getOrder(id);
         try {
             return getEntityManager().createNamedQuery("Kontragents.findById", Kontragents.class)
-                    .setParameter("id", o.getZamerId()).getSingleResult();
-        } catch (NoResultException | NonUniqueResultException nre) {
-            return new Kontragents();
+                    .setParameter("id", o.getZamerId().getId()).getSingleResult();
+        } catch (NoResultException | NonUniqueResultException | NullPointerException nre) {
+            return null;
         }
     }
 
