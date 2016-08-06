@@ -13,6 +13,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import ua.divas.restful.Groupmembers;
 import ua.divas.restful.OrderStatus;
 
 /**
@@ -41,6 +42,35 @@ public class OrderStatusFacadeREST extends AbstractFacade<OrderStatus> {
     @Produces({"application/xml", "application/json"})
     public List<OrderStatus> findAll() {
         return super.findAll();
+    }
+    
+    private List<Groupmembers> getPrivilege(String un) {
+        return getEntityManager().createNamedQuery("Groupmembers.findByGMember", Groupmembers.class)
+                .setParameter("gMember", un).getResultList();
+    }
+    
+     private String usrPriv(List<Groupmembers> mem){
+        String pr = "none";
+        for (Groupmembers temp : mem) {
+            pr = temp.getGName();
+	}
+        return pr;
+    }
+    
+    @GET
+    @Path("{user}/userStatuses")
+    @Produces({"application/xml", "application/json"})
+    public List<OrderStatus> findAllByPrivilege(@PathParam("user") String user) {
+        List<Groupmembers> priv = getPrivilege(user);
+        switch (usrPriv(priv)) {
+            case "tester":
+            case "administrator":
+            case "z_dispatcher":  return super.findAll();
+            case "z_manager":
+                return getEntityManager().createNamedQuery("OrderStatus.findByZamer", OrderStatus.class)
+                        .getResultList();
+            default: return  null;
+        }
     }
 
     @Override
