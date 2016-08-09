@@ -44,15 +44,18 @@ public class KontragentsFacadeREST extends AbstractFacade<Kontragents> {
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
     public Kontragents find(@PathParam("id") String id) {
-        return super.find(id);
+//        return super.find(id);
+        return getEntityManager().createNamedQuery("Kontragents.findById", Kontragents.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
     public List<Kontragents> findAll() {
-        return super.findAll();
-//        return getEntityManager().createNamedQuery("Kontragents.findAll", Kontragents.class).getResultList();
+//        return super.findAll();
+        return getEntityManager().createNamedQuery("Kontragents.findAll", Kontragents.class).getResultList();
     }
 
 //    @GET
@@ -71,6 +74,7 @@ public class KontragentsFacadeREST extends AbstractFacade<Kontragents> {
 
     @Override
     protected EntityManager getEntityManager() {
+        em.setProperty("javax.persistence.CacheRetrieveMode", "BYPASS");
         return em;
     }
     

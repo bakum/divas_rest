@@ -316,6 +316,7 @@ public class OrdersFacadeREST extends AbstractFacade<Orders> {
 
     @Override
     protected EntityManager getEntityManager() {
+        em.setProperty("javax.persistence.CacheRetrieveMode", "BYPASS");
         return em;
     }
 
